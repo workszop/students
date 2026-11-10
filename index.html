@@ -417,7 +417,7 @@ const PARTS = [
     lead: 'Jak model uczy się z danych, jak powstaje obraz z szumu, jak model językowy pisze tekst token po tokenie i czym różni się zwykły czat od RAG i agenta.',
     blocks: [
       { title: 'Jak AI się uczy?', icon: 'graduation-cap', items: [
-        ['core', 'Jak uczy się model językowy (tiny_llm)', GH('tiny_llm'), 'Pretraining, SFT i RL na małym modelu trenowanym w przeglądarce.'],
+        ['core', 'Jak uczy się model językowy (tiny_llm)', 'https://trening-modelu.warsztaty-ai.com/', 'Pretraining, SFT i RL na małym modelu trenowanym w przeglądarce.'],
         ['core', 'KlockiAI', 'https://workszop.org', 'Zbierasz własne dane i trenujesz klasyfikator na żywo.'],
         ['core', 'KlockiAI Mobile', 'https://mobi.workszop.org', 'To samo na telefonie: dane z kamery, trening w kieszeni.'],
         ['support', 'Jak widzi komputer', 'https://vision.workszop.org', 'Obraz jako liczby, klasyfikacja, lokalizacja i segmentacja, trening sieci na żywo.'],
@@ -425,10 +425,10 @@ const PARTS = [
         ['support', 'LoRA: dostrajanie modelu', GH('lora'), 'Jak dostroić duży model, zmieniając tylko małą część parametrów (EN).'],
       ]},
       { title: 'Generatywne AI', icon: 'sparkles', items: [
-        ['core', 'Od szumu do obrazu (difu)', GH('difu'), 'Dyfuzja krok po kroku: prawdziwe kroki odszumiania Stable Diffusion, seed, guidance i liczba kroków.'],
+        ['core', 'Od szumu do obrazu (difu)', 'https://dyfuzja.warsztaty-ai.com/', 'Dyfuzja krok po kroku: prawdziwe kroki odszumiania Stable Diffusion, seed, guidance i liczba kroków.'],
       ]},
       { title: 'Modele językowe', icon: 'message-square-text', items: [
-        ['core', 'Generowanie tekstu i okno kontekstu', GH('text'), 'Token po tokenie: kandydaci, prawdopodobieństwa, [EOS], budżet kontekstu.'],
+        ['core', 'Generowanie tekstu i okno kontekstu', 'https://generowanie-tekstu.warsztaty-ai.com/', 'Token po tokenie: kandydaci, prawdopodobieństwa, [EOS], budżet kontekstu.'],
         ['support', 'Jak czat pisze odpowiedź (chat-gen)', GH('chat-gen'), 'Po lewej czat, po prawej to, co dzieje się w tle: prawdziwe ślady SmolLM2 i model LFM3 na żywo w przeglądarce (EN).'],
         ['support', 'Inside the Chat', GH('in-the-chat'), 'Co się dzieje w czacie: tokeny, embeddingi, uwaga, pamięć, halucynacje.'],
         ['support', 'Mały model w przeglądarce (qwen)', GH('qwen'), 'Lokalny model na WebGPU: temperatura, prompt systemowy, inne języki.'],
@@ -438,13 +438,13 @@ const PARTS = [
         ['support', 'Plac zabaw z parametrami Gemini', GH('llm'), 'Jak wygląda wywołanie API i co zmieniają jego parametry.'],
       ]},
       { title: 'Systemy agentowe', icon: 'bot', items: [
-        ['core', 'Czat, RAG czy agent?', GH('chat-rag'), 'To samo pytanie obsłużone na trzy sposoby, porównane obok siebie.'],
+        ['core', 'Czat, RAG czy agent?', 'https://czat-agent.warsztaty-ai.com/', 'To samo pytanie obsłużone na trzy sposoby, porównane obok siebie.'],
         ['support', 'web-pi: agent kodujący w przeglądarce', GH('web-pi'), 'Agent z terminalem bash działający lokalnie na WebGPU (EN).'],
         ['support', 'SemIf: lokalne decyzje modelu', GH('openjev'), 'Mały model wybiera opcję albo zwraca JSON, wszystko w przeglądarce (EN).'],
       ]},
       { title: 'Aplikacje AI (RAG, automatyzacje)', icon: 'layers', items: [
-        ['core', 'RAG dla wsparcia technicznego', GH('rag'), 'Czat po lewej, osiem kroków „za kulisami” po prawej.'],
-        ['core', 'Symulator RAG', GH('ragsim'), 'Dzielenie dokumentu na fragmenty, wektory, wyszukiwanie i odpowiedź.'],
+        ['core', 'RAG dla wsparcia technicznego', 'https://rag.warsztaty-ai.com/', 'Czat po lewej, osiem kroków „za kulisami” po prawej.'],
+        ['core', 'Symulator RAG', 'https://symulator-rag.warsztaty-ai.com/', 'Dzielenie dokumentu na fragmenty, wektory, wyszukiwanie i odpowiedź.'],
         ['support', 'Ekran i zaplecze (user-demos)', GH('user-demos'), 'Co widzi użytkownik, a co dzieje się w tym czasie w tle.'],
         ['support', 'OCR w przeglądarce', GH('ocr3'), 'Odczyt dokumentu modelem LightOnOCR na WebGPU: automatyzacja papierów.'],
       ]},
@@ -474,7 +474,7 @@ const PARTS = [
     lead: 'Policz miesięczny koszt asystenta AI i sprawdź, od czego zależy rachunek: liczby tokenów, wyboru modelu i miejsca, w którym model działa.',
     blocks: [
       { title: 'Kalkulatory', icon: 'coins', items: [
-        ['core', 'Kalkulator kosztów AI (aicalc)', GH('aicalc'), 'Asystent RAG: API vs chmura GPU vs własny serwer.'],
+        ['core', 'Kalkulator kosztów AI (aicalc)', 'https://koszty-ai.warsztaty-ai.com/', 'Asystent RAG: API vs chmura GPU vs własny serwer.'],
         ['support', 'Licznik tokenów Gemini', GH('token_counting'), 'Ile tokenów ma Twój dokument? Liczy lokalnie, w przeglądarce.'],
       ]},
     ],
@@ -484,7 +484,7 @@ const PARTS = [
     lead: 'Kończysz tę część z własną mapą wdrożenia: od jednego zadania do decyzji, czy kontynuować.',
     blocks: [
       { title: 'Planowanie wdrożenia', icon: 'route', items: [
-        ['core', 'Mapa AI dla małej firmy (ai_roadmap)', GH('ai_roadmap'), 'Jedno zadanie, kolejne kroki i decyzja: kontynuuj, testuj ponownie albo zatrzymaj. PL/EN.'],
+        ['core', 'Mapa AI dla małej firmy (ai_roadmap)', 'https://mapa-wdrozenia.warsztaty-ai.com/', 'Jedno zadanie, kolejne kroki i decyzja: kontynuuj, testuj ponownie albo zatrzymaj. PL/EN.'],
       ]},
     ],
   },
@@ -502,16 +502,16 @@ const PARTS = [
     lead: 'Co dzieje się pod spodem: liczby dwójkowe, pliki, strony WWW, API i kod. Przydaje się, gdy budujesz własną aplikację z pomocą AI.',
     blocks: [
       { title: 'Komputer i dane', icon: 'binary', items: [
-        ['core', 'Co robi komputer? (Substrate)', GH('it4l'), 'Zbiór interaktywnych demonstracji o tym, jak działa komputer.'],
-        ['support', 'System dwójkowy', GH('it4l') + 'binary.html', 'Jak komputer zapisuje liczby i znaki zerami i jedynkami.'],
+        ['core', 'Co robi komputer? (Substrate)', 'https://komputer.warsztaty-ai.com/', 'Zbiór interaktywnych demonstracji o tym, jak działa komputer.'],
+        ['support', 'System dwójkowy', 'https://komputer.warsztaty-ai.com/' + 'binary.html', 'Jak komputer zapisuje liczby i znaki zerami i jedynkami.'],
         ['support', 'Anatomia obrazu', GH('img'), 'Wgrywasz zdjęcie i oglądasz metadane, surowe bajty i wartości pikseli.'],
-        ['support', 'Kompilator i interpreter', GH('it4l') + 'compilation.html', 'Dwa sposoby, w jakie komputer wykonuje kod.'],
+        ['support', 'Kompilator i interpreter', 'https://komputer.warsztaty-ai.com/' + 'compilation.html', 'Dwa sposoby, w jakie komputer wykonuje kod.'],
       ]},
       { title: 'Internet i WWW', icon: 'globe', items: [
-        ['core', 'Co się dzieje po wpisaniu adresu', GH('internet'), 'DNS, połączenie, żądanie i odpowiedź: droga od URL do strony.'],
+        ['core', 'Co się dzieje po wpisaniu adresu', 'https://internet.warsztaty-ai.com/', 'DNS, połączenie, żądanie i odpowiedź: droga od URL do strony.'],
         ['core', 'Jak przeglądarka ładuje stronę', 'https://ladowanie-strony.warsztaty-ai.com/', 'Od odpowiedzi HTTP przez DOM i CSSOM do układu i gotowego widoku.'],
-        ['support', 'Anatomia strony WWW', GH('it4l') + 'website.html', 'Z czego składa się strona: HTML, CSS i JavaScript.'],
-        ['support', 'Czym jest API', GH('it4l') + 'api.html', 'Jak jedna aplikacja rozmawia z drugą.'],
+        ['support', 'Anatomia strony WWW', 'https://komputer.warsztaty-ai.com/' + 'website.html', 'Z czego składa się strona: HTML, CSS i JavaScript.'],
+        ['support', 'Czym jest API', 'https://komputer.warsztaty-ai.com/' + 'api.html', 'Jak jedna aplikacja rozmawia z drugą.'],
       ]},
       { title: 'Dane i narzędzia', icon: 'wrench', items: [
         ['support', 'Dane warsztatowe', GH('data'), 'Gotowe zbiory danych do ćwiczeń i testowania aplikacji.'],
