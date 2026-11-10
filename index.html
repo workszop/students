@@ -509,7 +509,7 @@ const PARTS = [
       ]},
       { title: 'Internet i WWW', icon: 'globe', items: [
         ['core', 'Co się dzieje po wpisaniu adresu', GH('internet'), 'DNS, połączenie, żądanie i odpowiedź: droga od URL do strony.'],
-        ['core', 'Jak przeglądarka ładuje stronę', GH('web'), 'Od odpowiedzi HTTP przez DOM i CSSOM do układu i gotowego widoku.'],
+        ['core', 'Jak przeglądarka ładuje stronę', 'https://ladowanie-strony.warsztaty-ai.com/', 'Od odpowiedzi HTTP przez DOM i CSSOM do układu i gotowego widoku.'],
         ['support', 'Anatomia strony WWW', GH('it4l') + 'website.html', 'Z czego składa się strona: HTML, CSS i JavaScript.'],
         ['support', 'Czym jest API', GH('it4l') + 'api.html', 'Jak jedna aplikacja rozmawia z drugą.'],
       ]},
@@ -521,7 +521,6 @@ const PARTS = [
   },
 ];
 
-const CLOSED_KEY = 'nf-student-closed-parts';
 const GPU_TIMEOUT_MS = 5000;   // a browser that never answers counts as "cannot run models"
 const GPU_MIN_SHOW_MS = 600;   // keep "checking" on screen long enough to be seen
 const GPU_TEXT = {
@@ -555,8 +554,8 @@ PARTS.forEach(p => {
 });
 
 // ─── State ───
-function loadClosed() { try { return new Set(JSON.parse(localStorage.getItem(CLOSED_KEY)) || []); } catch { return new Set(); } }
-const state = { here: null, query: '', closed: loadClosed(), gpu: 'wait', gpuRun: 0, spy: null };
+// The page always opens with every part folded; a #part link opens that one part.
+const state = { here: null, query: '', closed: new Set(PARTS.map(p => p.id)), gpu: 'wait', gpuRun: 0, spy: null };
 
 // ─── DOM refs ───
 const viewEl = document.getElementById('view');
@@ -575,7 +574,6 @@ const partById = id => PARTS.find(p => p.id === id);
 const appsOf = (p, kind) => p.blocks.flatMap(b => b.apps).filter(a => !kind || a.kind === kind);
 const matchesQ = a => norm([a.title, a.note, a.url].join(' ')).includes(norm(state.query));
 const countsOf = p => appsOf(p, 'core').length + ' na zajęciach · ' + appsOf(p, 'support').length + ' dla chętnych';
-function saveClosed() { try { localStorage.setItem(CLOSED_KEY, JSON.stringify([...state.closed])); } catch {} }
 
 function chipsHtml(a, withOpt) {
   const f = [];
@@ -671,15 +669,15 @@ function render() {
 }
 function toggleSec(id) {
   state.closed.has(id) ? state.closed.delete(id) : state.closed.add(id);
-  saveClosed(); applyFold();
+  applyFold();
 }
 function setAll(open) {
   state.closed = open ? new Set() : new Set(PARTS.map(p => p.id));
-  saveClosed(); applyFold();
+  applyFold();
 }
 function goPart(id) {
   if (!partById(id)) return;
-  state.here = id; state.spy = null; state.closed.delete(id); saveClosed();
+  state.here = id; state.spy = null; state.closed.delete(id);
   if (state.query) { state.query = ''; searchEl.value = ''; }
   try { history.replaceState(null, '', '#' + id); } catch {}
   render();
