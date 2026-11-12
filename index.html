@@ -309,9 +309,6 @@ main { padding: 0; }
 .group-hero.tone-ink .edu-overline { color: var(--yellow); }
 
 /* ─── App cards: stone head, screenshot, body, dashed foot ─── */
-.blk { display: grid; grid-template-columns: 200px 1fr; gap: 10px 20px; padding: 18px 0; border-top: 1px solid var(--line-2); }
-.blk:first-child { border-top: 0; padding-top: 0; }
-.blk-l { margin: 14px 0 0; }
 .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 18px; }
 .card { background: var(--surface); border: 1px solid var(--line-2); border-radius: var(--r-lg); box-shadow: var(--shadow-sm); overflow: hidden; display: flex; flex-direction: column; }
 a.card { text-decoration: none; color: var(--ink); transition: border-color .15s ease; }
@@ -338,6 +335,9 @@ a.card:hover .card-head > .ic { color: var(--ink); }
 .sub-head .edu-overline { margin: 0; }
 .sub-head::after { content: ""; flex: 1; height: 1px; background: var(--line-2); }
 .cards.small { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px; }
+.cards.cols { grid-template-columns: repeat(3, 1fr); }
+.cards.cols.small { grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 1100px) { .cards.cols { grid-template-columns: repeat(2, 1fr); } .cards.cols.small { grid-template-columns: repeat(3, 1fr); } }
 .cards.small .card-head { padding: 10px 14px; }
 .cards.small .badge { width: 28px; height: 28px; border-radius: var(--r-xs); }
 .cards.small .badge .ic { width: 15px; height: 15px; }
@@ -359,9 +359,8 @@ footer .wrap { padding-top: 24px; padding-bottom: 40px; font-family: var(--font-
   .sec-head { flex-wrap: wrap; } .sec-head h2 { flex: 1; min-width: 0; font-size: var(--h3); }
   .sec-head::after { flex: 1 0 100%; order: 4; } .sec-meta { display: none; }
   .group-hero { padding: 22px; }
-  .blk { grid-template-columns: 1fr; } .blk-l { margin-top: 0; }
-  .cards, .cards.solo { grid-template-columns: 1fr; }
-  .cards.small { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .cards, .cards.solo, .cards.cols { grid-template-columns: 1fr; }
+  .cards.small, .cards.cols.small { grid-template-columns: 1fr 1fr; gap: 10px; }
   .cards.solo .card { display: flex; }
   .cards.solo .app-img { height: auto; border-right: 0; border-bottom: 1px solid var(--line); }
   .cards.solo .card-body { padding: 14px 18px 16px; } .cards.solo .card-body p { font-size: var(--body-sm); } .cards.solo .tile-h h3 { font-size: 18px; }
@@ -543,7 +542,7 @@ const shotName = url => url.replace(/^https?:\/\//, '').replace(/\/$/, '').toLow
 PARTS.forEach(p => {
   p.blocks.forEach(b => {
     b.apps = b.items.map(([kind, title, url, note]) => ({
-      kind, url, part: p, icon: b.icon,
+      kind, url, part: p, icon: b.icon, topic: b.title,
       title: title.replace(SLUG_RE, ''),
       note: note.replace(/\s*\(EN\)/, ''),
       en: /\(EN\)/.test(note),
@@ -587,20 +586,17 @@ function cardHtml(a, o = {}) {
   return '<a class="card" data-app data-kind="' + a.kind + '" href="' + esc(a.url) + '" target="_blank" rel="noopener">'
     + '<div class="card-head"><span class="tile-h"><span class="badge ' + a.part.tone + '">' + ic(a.icon) + '</span><h3>' + esc(a.title) + '</h3></span>' + ic('arrow-up-right') + '</div>'
     + (o.img ? '<img class="app-img" src="shots/' + a.shot + '.webp" width="800" height="500" loading="lazy" alt="Zrzut ekranu aplikacji ' + esc(a.title) + '">' : '')
-    + '<div class="card-body">' + (o.part ? '<span class="app-p">' + esc(a.part.title) + '</span>' : '') + '<p>' + esc(a.note) + '</p></div>'
+    + '<div class="card-body">' + (o.part ? '<span class="app-p">' + esc(a.part.title) + '</span>' : '') + (o.topic ? '<span class="app-p">' + esc(a.topic) + '</span>' : '') + '<p>' + esc(a.note) + '</p></div>'
     + (chips ? '<div class="card-foot">' + chips + '</div>' : '') + '</a>';
 }
-// Apps of one kind in a part as screenshot cards; multi-block parts keep their sub-topics as labelled rows.
+// Apps of one kind in a part as screenshot cards. A part with several sub-topics shows them in one grid
+// (3 columns for class apps, 4 for optional ones) and each card carries its sub-topic as a label.
 function groupHtml(p, kind) {
+  const apps = appsOf(p, kind);
+  if (!apps.length) return '';
   const multi = p.blocks.length > 1;
-  const cls = kind === 'support' ? ' small' : appsOf(p, 'core').length === 1 ? ' solo' : '';
-  const out = p.blocks.map(b => {
-    const apps = b.apps.filter(a => a.kind === kind);
-    if (!apps.length) return '';
-    const cards = '<div class="cards' + cls + '">' + apps.map(a => cardHtml(a, { img: true })).join('') + '</div>';
-    return multi ? '<div class="blk"><p class="blk-l edu-overline">' + esc(b.title) + '</p>' + cards + '</div>' : cards;
-  }).join('');
-  return multi ? '<div class="blks">' + out + '</div>' : out;
+  const cls = (multi ? ' cols' : '') + (kind === 'support' ? ' small' : apps.length === 1 ? ' solo' : '');
+  return '<div class="cards' + cls + '">' + apps.map(a => cardHtml(a, { img: true, topic: multi })).join('') + '</div>';
 }
 function optHtml(p) {
   if (!appsOf(p, 'support').length) return '';
